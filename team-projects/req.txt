@@ -1,0 +1,3 @@
+tkinter pygubu
+test
+apt install python3-pyaudio
