@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="tk.Toplevel" id="top">
+    <property name="container">false</property>
+    <property name="height">500</property>
+    <property name="overrideredirect">False</property>
+    <property name="resizable">both</property>
+    <property name="title" translatable="yes">SoundHound</property>
+    <property name="width">500</property>
+    <child>
+      <object class="ttk.Frame" id="main-frame">
+        <property name="height">370</property>
+        <property name="width">450</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">False</property>
+          <property name="row">0</property>
+          <rows>
+            <row id="0">
+              <property name="weight">0</property>
+            </row>
+            <row id="1">
+              <property name="minsize">0</property>
+            </row>
+          </rows>
+          <columns>
+            <column id="0">
+              <property name="minsize">0</property>
+              <property name="weight">0</property>
+            </column>
+          </columns>
+        </layout>
+        <child>
+          <object class="tk.Canvas" id="ShowGraphView">
+            <property name="background">#00d9d9</property>
+            <property name="closeenough">0</property>
+            <property name="confine">true</property>
+            <property name="cursor">arrow</property>
+            <property name="height">300</property>
+            <property name="highlightbackground">#000000</property>
+            <property name="insertofftime">0</property>
+            <property name="insertontime">0</property>
+            <property name="insertwidth">0</property>
+            <property name="takefocus">true</property>
+            <property name="width">450</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">0</property>
+              <property name="propagate">False</property>
+              <property name="row">1</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="play">
+            <property name="command">on_play_button_click</property>
+            <property name="default">normal</property>
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">Play/Pause</property>
+            <property name="underline">0</property>
+            <property name="width">8</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">95</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="Stop">
+            <property name="command">on_stop_button_click</property>
+            <property name="text" translatable="yes">Stop</property>
+            <property name="width">8</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">365</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">n</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="Rewind">
+            <property name="command">on_rewind_button_click</property>
+            <property name="text" translatable="yes">Rewind</property>
+            <property name="width">8</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">5</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="FastFoward">
+            <property name="command">on_ff_button_click</property>
+            <property name="text" translatable="yes">FF</property>
+            <property name="width">8</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">185</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="Record">
+            <property name="command">on_record_click</property>
+            <property name="text" translatable="yes">Record</property>
+            <property name="width">8</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">275</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="ImportFile">
+            <property name="command">on_import_click</property>
+            <property name="compound">top</property>
+            <property name="font">TkDefaultFont</property>
+            <property name="height">1</property>
+            <property name="justify">left</property>
+            <property name="padx">0</property>
+            <property name="pady">0</property>
+            <property name="relief">flat</property>
+            <property name="repeatinterval">0</property>
+            <property name="text" translatable="yes">ImportFile</property>
+            <property name="underline">0</property>
+            <property name="width">20</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="Save">
+            <property name="command">on_click_save</property>
+            <property name="cursor">arrow</property>
+            <property name="justify">left</property>
+            <property name="padx">1</property>
+            <property name="relief">flat</property>
+            <property name="text" translatable="yes">Save</property>
+            <property name="underline">0</property>
+            <property name="width">20</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="padx">175</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="Process">
+            <property name="command">on_process_click</property>
+            <property name="text" translatable="yes">Process</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
