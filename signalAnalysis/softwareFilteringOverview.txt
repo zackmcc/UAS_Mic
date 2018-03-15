@@ -1,0 +1,5 @@
+1. Padasip samples real-time audio into matrix format
+2. Send prefiltered audio to FFT matlibplot for GUI
+2. Padasip LMS adaptive filter pulls out audio based on frequency of motors
+3. Send postfiltered audio to FFT matlibplot for gui
+4. Play either prefiltered or postfiltered audio in gui based on user choice
