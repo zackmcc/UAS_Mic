@@ -112,20 +112,6 @@
           </object>
         </child>
         <child>
-          <object class="ttk.Button" id="Record">
-            <property name="command">on_record_click</property>
-            <property name="text" translatable="yes">Record</property>
-            <property name="width">8</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="padx">275</property>
-              <property name="propagate">True</property>
-              <property name="row">2</property>
-              <property name="sticky">w</property>
-            </layout>
-          </object>
-        </child>
-        <child>
           <object class="tk.Button" id="ImportFile">
             <property name="command">on_import_click</property>
             <property name="compound">top</property>
