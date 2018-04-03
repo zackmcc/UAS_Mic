@@ -26,22 +26,34 @@ class Application:
 
 		self.pa = pyaudio.PyAudio()
 
+
+
+		
+
+
+
 #	def playingCallback(in_data, frame_count, time_info, status):
 #		data = self.file_imported.readframes(frame_count)
 #		return (data, pyaudio.paContinue)
 
-		self.play_pause=True
+		self.play_pause=False
+		self.started=False
 
 	def on_play_button_click(self):
-		if self.play_pause:
+		if not self.started:
 			mixer.music.play()
-			self.play_pause=False
-		else:
-			mixer.music.pause()
-			self.play_pause=True
+			self.started = True
+		else:	
+			if self.play_pause:
+				mixer.music.unpause()
+				self.play_unpause=False
+			else:
+				mixer.music.pause()
+				self.play_pause=True
+
 
 	def on_ff_button_click(self):
-		print("hello this wokrs")
+		mixer.music.set_pos((mixer.music.get_pos()/1000)+35)
 
 	def on_import_click(self):
 		self.fileName = askopenfilename(filetypes=[("MP3 files" ,"*.mp3"),("Wave files" , "*.wav")])
@@ -57,7 +69,8 @@ class Application:
 		print("hello this wokrs")
 
 	def on_rewind_button_click(self):
-		print("hello this wokrs")
+		mixer.music.rewind()
+
 
 	def on_process_click(self):
 		print("yep")
