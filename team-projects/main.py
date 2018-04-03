@@ -76,7 +76,11 @@ class Application:
 
 	def on_rewind_button_click(self):
 		mixer.music.rewind()
+		currentLengthPlayed = mixer.music.get_pos()/1000;
+		lengthToJump = -30;
 
+		self.lastskip = self.lastskip +  lengthToJump;
+		mixer.music.set_pos(self.lastskip);
 
 	def on_process_click(self):
 		print("yep")
