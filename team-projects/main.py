@@ -28,7 +28,7 @@ class Application:
 
 
 
-		
+		self.lastskip=0		
 
 
 
@@ -53,7 +53,13 @@ class Application:
 
 
 	def on_ff_button_click(self):
-		mixer.music.set_pos((mixer.music.get_pos()/1000)+35)
+		mixer.music.rewind()
+		currentLengthPlayed = mixer.music.get_pos()/1000; 
+		lengthToJump = 30;
+		self.lastskip += lengthToJump + currentLengthPlayed;
+		mixer.music.set_pos(self.lastskip);
+
+
 
 	def on_import_click(self):
 		self.fileName = askopenfilename(filetypes=[("MP3 files" ,"*.mp3"),("Wave files" , "*.wav")])
