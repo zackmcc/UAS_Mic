@@ -2,15 +2,16 @@
 <interface>
   <object class="tk.Toplevel" id="top">
     <property name="container">false</property>
-    <property name="height">500</property>
+    <property name="height">800</property>
     <property name="overrideredirect">False</property>
-    <property name="resizable">both</property>
+    <property name="resizable">none</property>
     <property name="title" translatable="yes">SoundHound</property>
-    <property name="width">500</property>
+    <property name="width">800</property>
     <child>
       <object class="ttk.Frame" id="main-frame">
-        <property name="height">370</property>
-        <property name="width">450</property>
+        <property name="height">800</property>
+        <property name="takefocus">true</property>
+        <property name="width">800</property>
         <layout>
           <property name="column">0</property>
           <property name="propagate">False</property>
@@ -34,15 +35,15 @@
           <object class="tk.Canvas" id="ShowGraphView">
             <property name="background">#00d9d9</property>
             <property name="closeenough">0</property>
-            <property name="confine">true</property>
-            <property name="cursor">arrow</property>
-            <property name="height">300</property>
+            <property name="cursor">based_arrow_down</property>
+            <property name="height">725</property>
             <property name="highlightbackground">#000000</property>
             <property name="insertofftime">0</property>
             <property name="insertontime">0</property>
             <property name="insertwidth">0</property>
             <property name="takefocus">true</property>
-            <property name="width">450</property>
+            <property name="width">800</property>
+            <property name="xscrollincrement">0</property>
             <layout>
               <property name="column">0</property>
               <property name="padx">0</property>
@@ -79,7 +80,7 @@
               <property name="padx">365</property>
               <property name="propagate">True</property>
               <property name="row">2</property>
-              <property name="sticky">n</property>
+              <property name="sticky">ne</property>
             </layout>
           </object>
         </child>
@@ -141,6 +142,7 @@
               <property name="column">0</property>
               <property name="propagate">True</property>
               <property name="row">0</property>
+              <property name="sticky">e</property>
             </layout>
           </object>
         </child>
