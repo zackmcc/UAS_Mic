@@ -68,7 +68,7 @@ class Application:
 		print("hello this wokrs")
 
 	def on_stop_button_click(self):
-		print("hello this wokrs")
+		mixer.music.stop();
 
 	def on_click_save(self):
 		print("hello this wokrs")
@@ -100,6 +100,8 @@ class Application:
 			self.canRun = True
 			#self.file_imported = vlc.MediaPlayer(self.fileName)
 			mixer.music.load(self.fileName)
+			self.started=False
+			self.lastskip = 0;
 			#except:
 				#showerror("Cant open this type of File")
 
