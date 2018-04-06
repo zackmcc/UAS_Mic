@@ -16,24 +16,20 @@ class Application:
 		mixer.init()
 
 		builder.add_from_file('teamProj.ui')
+		
 
-		self.mainwindow = builder.get_object('main-frame',master)
+		self.mainwindow = builder.get_object('main-frame')
 
 		builder.connect_callbacks(self) # Creates the call backs for the gui operations
 
 
 		self.should_play=True
 
-
-
+		self.canvas = self.builder.get_object('ShowGraphView',self.mainwindow)
+		bgPic = tk.PhotoImage(file="background.gif")	
+		self.canvas.create_image(300,450,image = bgPic,anchor = 'w')
 
 		self.lastskip=0		
-
-
-
-#	def playingCallback(in_data, frame_count, time_info, status):
-#		data = self.file_imported.readframes(frame_count)
-#		return (data, pyaudio.paContinue)
 
 		self.play_pause=False
 		self.started=False
