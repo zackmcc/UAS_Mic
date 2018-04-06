@@ -141,10 +141,21 @@ class Application:
 
 			#plot amplitude (or loudness) over time
 			plt.figure(1)
-			plt.plot(time, channel1, linewidth=0.01, alpha=0.7, color='#ff7f00')
+			plt.subplot(211)
+			plt.title('Graph of ' + self.fileName)
+			plt.xlabel('Time (Seconds');
+			plt.ylabel('Amplitude')
+			plt.plot(time, channel1, linewidth=0.02, alpha=0.7)
+			
+
+			fourier=np.fft.fft(channel1)
+			plt.figure(1)
+			plt.subplot(212)
+			plt.plot(fourier)
+			
+			plt.ylabel('Amplitude')
+			plt.xlabel('k')
 			plt.show()
-
-
 
 
 
