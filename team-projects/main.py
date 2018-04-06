@@ -7,6 +7,11 @@ from pygame import mixer
 from pydub import AudioSegment
 from PIL import Image
 from PIL import ImageTk
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.io.wavfile
+import pydub
+
 ##sudo apt install python3-pil.imagetk
 ## sudo apt install python-imaging-tk ffmpeg
 ##ALso install ffmpeg
@@ -28,9 +33,7 @@ class Application:
 		self.should_play=True
 		
 		self.canvas = self.builder.get_object('ShowGraphView',self.mainwindow)
-		#self.bgPic = tk.PhotoImage(file="background.gif")	
 		self.bgPic = ImageTk.PhotoImage(Image.open("background.gif").resize((800,725)))
-
 	
 		self.canvas.create_image(0,0,image = self.bgPic,anchor = 'nw')
 		
@@ -83,13 +86,75 @@ class Application:
 		mixer.music.set_pos(self.lastskip);
 
 	def on_process_click(self):
+	#	spf = wave.open(self.fileName,'r')
+		
+
+		#Extract Raw Audio from Wav File
+	#	signal = spf.readframes(-1)
+	#	signal = np.fromstring(signal, 'Int16')
+	#	fs = spf.getframerate()
+
+
+
+	#	Time=np.linspace(0, len(signal)/fs, num=len(signal))
+
+	#	plt.figure(1)
+	#	plt.title('Signal Wave...')
+#		plt.plot(Time,signal)
+#		plt.show()
+
+
+
+
+
+	#	plt.figure(1)
+	#	plt.title('Signal Wave...')
+	#	plt.plot(signal)
+	#	plt.show()
+		
+		
+
+
+
+
+
 		if "mp3" not in self.fileName:
+			#rate, data = wav.read(self.fileName)
+			#plt.plot(data)
+			#plt.show()
+
+			rate,audData=scipy.io.wavfile.read(self.fileName)
+
+			print(rate)
+			print(audData)
+
+			wav_length = audData.shape[0]/rate #rate in seconds
+			data_type = audData.dtype #data type
+
+			print(wav_length)
+			print(data_type)
+			
+
+			channel1=audData[:,0]
+			#create a time variable in seconds
+			time = np.arange(0, float(audData.shape[0]), 1) / rate
+
+			#plot amplitude (or loudness) over time
+			plt.figure(1)
+			plt.plot(time, channel1, linewidth=0.01, alpha=0.7, color='#ff7f00')
+			plt.show()
+
+
+
+
+
+			#code that converts to a mp3 for playback
 			newFile = self.fileName.replace(".wav",".mp3")
 			AudioSegment.from_wav(self.fileName).export(newFile,format="mp3")
 			self.fileName = newFile
 			self.loadFile()				
 
-
+			
 
 
 
