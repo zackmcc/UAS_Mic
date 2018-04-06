@@ -2,12 +2,12 @@ import tkinter as tk
 import pygubu
 from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showerror
-import pyaudio
 import wave
-import vlc
 from pygame import mixer
-CHUNK = 256
+from pydub import AudioSegment
+import pyaudio
 
+##ALso install ffmpeg
 
 class Application:
 	def __init__(self,master):
@@ -24,7 +24,6 @@ class Application:
 
 		self.should_play=True
 
-		self.pa = pyaudio.PyAudio()
 
 
 
@@ -83,8 +82,11 @@ class Application:
 		mixer.music.set_pos(self.lastskip);
 
 	def on_process_click(self):
-		print("yep")
-
+		if "mp3" not in self.fileName:
+			newFile = self.fileName.replace(".wav",".mp3")
+			AudioSegment.from_wav(self.fileName).export(newFile,format="mp3")
+			self.fileName = newFile
+			self.loadFile()				
 
 
 
