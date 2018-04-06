@@ -26,8 +26,11 @@ class Application:
 		self.should_play=True
 
 		self.canvas = self.builder.get_object('ShowGraphView',self.mainwindow)
-		bgPic = tk.PhotoImage(file="background.gif")	
-		self.canvas.create_image(300,450,image = bgPic,anchor = 'w')
+		self.bgPic = tk.PhotoImage(file="background.gif")	
+		#self.canvas.create_image(self.canvas.winfo_height()/2,self.canvas.winfo_width()/2,image = self.bgPic,anchor = 'w')
+		self.canvas.create_image(0,0,image = self.bgPic,anchor = 'nw')
+		
+
 
 		self.lastskip=0		
 
