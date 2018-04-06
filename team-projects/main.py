@@ -5,8 +5,10 @@ from tkinter.messagebox import showerror
 import wave
 from pygame import mixer
 from pydub import AudioSegment
-import pyaudio
-
+from PIL import Image
+from PIL import ImageTk
+##sudo apt install python3-pil.imagetk
+## sudo apt install python-imaging-tk ffmpeg
 ##ALso install ffmpeg
 
 class Application:
@@ -24,10 +26,12 @@ class Application:
 
 
 		self.should_play=True
-
+		
 		self.canvas = self.builder.get_object('ShowGraphView',self.mainwindow)
-		self.bgPic = tk.PhotoImage(file="background.gif")	
-		#self.canvas.create_image(self.canvas.winfo_height()/2,self.canvas.winfo_width()/2,image = self.bgPic,anchor = 'w')
+		#self.bgPic = tk.PhotoImage(file="background.gif")	
+		self.bgPic = ImageTk.PhotoImage(Image.open("background.gif").resize((800,725)))
+
+	
 		self.canvas.create_image(0,0,image = self.bgPic,anchor = 'nw')
 		
 
