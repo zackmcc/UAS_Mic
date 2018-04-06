@@ -70,8 +70,6 @@ class Application:
 	def on_stop_button_click(self):
 		mixer.music.stop();
 
-	def on_click_save(self):
-		print("hello this wokrs")
 
 	def on_rewind_button_click(self):
 		mixer.music.rewind()

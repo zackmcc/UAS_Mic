@@ -134,25 +134,6 @@
           </object>
         </child>
         <child>
-          <object class="tk.Button" id="Save">
-            <property name="command">on_click_save</property>
-            <property name="cursor">arrow</property>
-            <property name="justify">left</property>
-            <property name="padx">1</property>
-            <property name="relief">flat</property>
-            <property name="text" translatable="yes">Save</property>
-            <property name="underline">0</property>
-            <property name="width">20</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="padx">175</property>
-              <property name="propagate">True</property>
-              <property name="row">0</property>
-              <property name="sticky">w</property>
-            </layout>
-          </object>
-        </child>
-        <child>
           <object class="ttk.Button" id="Process">
             <property name="command">on_process_click</property>
             <property name="text" translatable="yes">Process</property>
