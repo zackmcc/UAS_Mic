@@ -3,10 +3,14 @@ import pygubu
 from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showerror
 import wave
+from myamp import amplifier
 from pygame import mixer
 from pydub import AudioSegment
 from PIL import Image
 from PIL import ImageTk
+from scipy.io.wavfile import read, write
+from scipy.signal.filter_design import butter
+from scipy.signal import lfilter
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io.wavfile
@@ -19,7 +23,7 @@ import pydub
 class Application:
 	def __init__(self,master):
 		self.builder = builder = pygubu.Builder()
-		
+		mixer.pre_init(44100, 16, 2, 4096) #frequency, size, channels, buffersize
 		mixer.init()
 
 		builder.add_from_file('teamProj.ui')
@@ -33,7 +37,7 @@ class Application:
 		self.should_play=True
 		
 		self.canvas = self.builder.get_object('ShowGraphView',self.mainwindow)
-		self.bgPic = ImageTk.PhotoImage(Image.open("background.gif").resize((800,725)))
+		self.bgPic = ImageTk.PhotoImage(Image.open("backg.gif").resize((800,725)))
 	
 		self.canvas.create_image(0,0,image = self.bgPic,anchor = 'nw')
 		
@@ -43,7 +47,8 @@ class Application:
 
 		self.play_pause=False
 		self.started=False
-
+		
+		
 	def on_play_button_click(self):
 		if not self.started:
 			mixer.music.play()
@@ -67,7 +72,7 @@ class Application:
 
 
 	def on_import_click(self):
-		self.fileName = askopenfilename(filetypes=[("MP3 files" ,"*.mp3"),("Wave files" , "*.wav")])
+		self.fileName = askopenfilename(filetypes=[("Wav files" , "*.wav"), ("MP3 files",".mp3")])
 		self.loadFile()
 
 	def on_record_click(self):
@@ -168,40 +173,35 @@ class Application:
 
 
 
-
-
-
 			## Pydub does not
-			song = AudioSegment.from_wav(self.fileName)
-			print("Entered Low Pass Filter")
-			newSong = song.low_pass_filter(3000)
-			newSong = newSong.low_pass_filter(3000)
-			newSong = newSong.low_pass_filter(3000)
-			newSong = newSong.low_pass_filter(3000)
-			newSong = newSong.low_pass_filter(5000)
-			newSong = newSong.low_pass_filter(5000)
-			newSong = newSong.apply_gain(+10.0)
-			print("Exited Low Pass Filter")
-			newSong.export(self.fileName + "Filtered" + ".wav",format="wav")
-			self.fileName = self.fileName+"Filtered.wav";
-		
+			inputAudio = AudioSegment.from_wav(self.fileName)
+			print("Entered Bandpass Filter")
+			lo,hi= 80,150
+			sr,y=read(self.fileName)
+			b,a=butter(N=2, Wn=[lo/sr, hi/sr], btype='band')
+			x = lfilter(b,a,y)
+			#newSong = song.low_pass_filter(3000)
+			#newSong = newSong.low_pass_filter(3000)
+			#newSong = newSong.low_pass_filter(3000)
+			#newSong = newSong.low_pass_filter(3000)
+			#newSong = newSong.low_pass_filter(5000)
+			#newSong = newSong.low_pass_filter(5000)
+			#newSong = newSong.apply_gain(+10.0)
+			print("Exited Bandpass Filter")
+			write(self.fileName + '_Filtered.wav', sr, x.astype(np.int16))
+			
+			#export(self.fileName + "Filtered" + ".wav",format="wav")
+			self.fileName = self.fileName+"_Filtered.wav";
+			#amplifier(self.fileName, self.fileName,10) 
 
 			createGraphs(self.fileName,"Filtered");
 			
 
-
-
-
-
-
-
-
-
 			#code that converts to a mp3 for playback
-			newFile = self.fileName.replace(".wav",".mp3")
+			#newFile = self.fileName.replace(".wav",".mp3")
 			#AudioSegment.from_wav(self.fileName).export(newFile,format="mp3")
-			self.fileName = newFile
-			newSong.export(self.fileName,format="mp3")
+			#self.fileName = newFile
+			#newSong.export(self.fileName,format="mp3")
 			self.loadFile()				
 			plt.show()
 			
