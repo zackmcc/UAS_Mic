@@ -9,6 +9,7 @@ import scipy.fftpack
 import scipy.signal
 import pylab
 
+import amp
 
 import defs
 import stft
@@ -74,8 +75,8 @@ def spectral_subtraction(wav_filename, noise_filename):
     #reconstructed = numpy.zeros(len(fft), dtype=complex)
     #for i in range(len(reconstructed)):
     theta = numpy.angle(fft)
-    alpha = 0.0005
-    beta = 0.0005
+    alpha = 0.000001
+    beta = 0.000001
     r = numpy.zeros(len(fft))
     #for i in range(len(fft)):
     #    r[i] = (abs(fft[i])**2 - alpha * means_power[i])
@@ -101,11 +102,18 @@ def spectral_subtraction(wav_filename, noise_filename):
     pylab.plot(freqs, rec_db,
         label="reconstructed")
     pylab.legend()
+    pylab.xlabel('Frequency (Hz)')
+    pylab.ylabel('Amplitude (dB)')
 
     reconstructed_sig = scipy.fftpack.ifft(reconstructed )
 
     reconstructed_sig /= window
     reconstructed_sig = numpy.real(reconstructed_sig)
+	
+    #sig = reconstructed_sig
+    #sig = sig / numpy.abs(sig).max()
+    #sig = amp.arctan_compressor(sig, 10)
+    #reconstructed_sig = sig
 
     #pylab.figure()
     #pylab.plot(reconstructed_sig)
